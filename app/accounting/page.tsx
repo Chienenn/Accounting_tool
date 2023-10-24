@@ -87,14 +87,14 @@ const AccountingPage = () => {
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="border border-gray-500 rounded px-2 py-1 mr-2 w-24"
+          className="border border-gray-500 rounded px-2 py-1 mr-2 w-24 sm:w-32 md:w-48"
           placeholder="輸入金額"
         />
         <input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="border border-gray-500 rounded px-2 py-1 mr-2"
+          className="border border-gray-500 rounded px-2 py-1 mr-2 w-24 sm:w-32 md:w-48"
           placeholder="消費描述"
         />
         <Button variant="outline" onClick={handleAddRecord}>
@@ -103,7 +103,7 @@ const AccountingPage = () => {
       </div>
 
       <div className="border-b border-gray-300 mt-9 mb-5"></div>
-      <div className="w-1/3 mx-auto mt-8">
+      <div className="w-1/3 mx-auto mt-8 max-sm:w-1/2">
         <ul>
           {records.map((record) => (
             <li
