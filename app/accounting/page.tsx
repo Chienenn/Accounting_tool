@@ -78,7 +78,7 @@ const AccountingPage = () => {
         <select
           value={recordType}
           onChange={(e) => setRecordType(e.target.value)}
-          className="border border-gray-500 rounded px-2 py-1 mr-2"
+          className="border border-gray-500 rounded px-2 py-1 mr-2 max-sm:2/12"
         >
           <option value="income">收入</option>
           <option value="expense">支出</option>
@@ -97,7 +97,11 @@ const AccountingPage = () => {
           className="border border-gray-500 rounded px-2 py-1 mr-2 w-24 sm:w-32 md:w-48"
           placeholder="消費描述"
         />
-        <Button variant="outline" onClick={handleAddRecord}>
+        <Button
+          variant="outline"
+          onClick={handleAddRecord}
+          className="max-sm:w-1/6"
+        >
           新增紀錄
         </Button>
       </div>
@@ -110,13 +114,15 @@ const AccountingPage = () => {
               key={record.id}
               className="flex items-center justify-between mb-2"
             >
-              <span className="flex items-center">
+              <span className="flex items-center max-sm:w-1/2">
                 {record.type === "income" ? (
-                  <span className="text-green-500">
+                  <span className="text-green-500 max-sm:w-1/2">
                     +&nbsp; {record.amount}{" "}
                   </span>
                 ) : (
-                  <span className="text-red-500">-&nbsp; {record.amount}</span>
+                  <span className="text-red-500 max-sm:w-1/2">
+                    -&nbsp; {record.amount}
+                  </span>
                 )}
                 <span className="spacer">&nbsp;&nbsp; </span>
                 {record.description}
