@@ -44,7 +44,7 @@ const AccountingPage = () => {
       try {
         const docRef = await addDoc(collection(db, "records"), newRecord);
         console.log("Document written with : ", docRef.id);
-        setRecords([...records, { id: docRef.id, ...newRecord } as record]);
+        setRecords([{ id: docRef.id, ...newRecord }, ...records]);
       } catch (error) {
         console.error("Error adding document: ", error);
       }
