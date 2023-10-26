@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { doc, deleteDoc } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.apiKey,
@@ -34,7 +35,6 @@ const AccountingPage = () => {
 
   const handleAddRecord = async () => {
     if (amount && description) {
-      // 創建新的記錄對象
       const newRecord = {
         type: recordType,
         amount: parseFloat(amount),
@@ -72,6 +72,32 @@ const AccountingPage = () => {
       console.error("Error deleting document: ", error);
     }
   };
+  useEffect(() => {
+    // 進入頁面時取得資料
+    const fetchRecords = async () => {
+      try {
+        const querySearch = await getDocs(collection(db, "records"));
+        const data: record[] = [];
+        querySearch.forEach((doc) => {
+          const recordData = doc.data();
+          const recordWithId = {
+            id: doc.id,
+            type: "",
+            amount: 0,
+            description: "",
+            ...recordData,
+          };
+          data.push(recordWithId);
+        });
+        setRecords(data);
+      } catch (error) {
+        console.error("Error fetching records: ", error);
+      }
+    };
+
+    fetchRecords();
+  }, []);
+
   return (
     <div>
       <div className="flex items-center justify-center mt-8">
